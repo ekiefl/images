@@ -20,7 +20,7 @@ First, dump an album of images into a directory within `images/`.
 Then resulting
 
 ```
-./process_images.sh`
+./process_images.sh
 ```
 
 It will make WEBP equivalents of all your images for 3 different qualities:
