@@ -1,7 +1,7 @@
 # Function to delete original images
 delete_originals() {
     echo "Deleting original images..."
-    for ext in jpg jpeg png heic HEIC; do
+    for ext in JPEG JPG jpg jpeg png heic HEIC; do
         find images -type f -iname "*.${ext}" -delete
     done
 }

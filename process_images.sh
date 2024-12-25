@@ -12,18 +12,26 @@ fi
 # Function to convert images to WEBP format
 convert_to_webp() {
     echo "Converting images to WEBP format..."
-    for ext in jpg jpeg png heic HEIC; do
-        find images -type f -iname "*.${ext}" -exec sh -c '
+    
+    # You only need each extension once, because `-iname` in 'find' ignores case.
+    for ext in jpg jpeg png heic; do
+        find images -type f -iname "*.${ext}" -exec bash -c '
             input="$1"
             output="${input%.*}.webp"
             echo "Converting $input to $output"
             mkdir -p "$(dirname "$output")"
-            if [[ "${input,,}" == *.heic ]]; then
-                magick "$input" -quality 85 "$output"
-            else
-                cwebp -q 85 -mt "$input" -o "$output"
-            fi
-        ' sh {} \;
+
+            lowercase_input=$(echo "$input" | tr "[:upper:]" "[:lower:]")
+            # Use a case statement or test for .heic
+            case "$lowercase_input" in
+                *.heic)
+                    magick "$input" -quality 85 "$output"
+                    ;;
+                *)
+                    cwebp -q 85 -mt "$input" -o "$output"
+                    ;;
+            esac
+        ' bash {} \;
     done
 }
 
