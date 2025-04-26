@@ -35,6 +35,14 @@ After generating the WEBP images, feel free to delete the original images; the W
 ./delete_non_webp.sh
 ```
 
+If you need PNG versions of your WebP images (for compatibility with applications that don't support WebP), you can convert them using:
+
+```
+./convert_to_png.sh
+```
+
+This will create PNG versions of all WebP images in the `pngs/` directory while maintaining the original folder structure.
+
 Double check that the images look correct, haven't rotated, and have reasonable sizes (generally less than 1MB for "reasonable", and less than 250KB for thumbnails). If an image rotates, you can use the following `imagemagick` command to fix it:
 
 ```
